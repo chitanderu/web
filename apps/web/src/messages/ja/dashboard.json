@@ -1,0 +1,21 @@
+{
+  "categories": "カテゴリー",
+  "pages": "ページ",
+  "write": "作成",
+  "manage": "管理",
+  "unread_comments": "未読コメント",
+  "cache": "キャッシュ",
+  "clear_api_cache": "API キャッシュを削除",
+  "clear_data_cache": "データキャッシュを削除",
+  "clear_success": "削除しました",
+  "api_total_calls": "API 総呼び出し回数",
+  "today_ip_visits": "今日の IP アクセス数",
+  "site_total_characters": "サイト全体の文字数",
+  "total_reads": "総閲覧数",
+  "total_likes": "総いいね数",
+  "online_visitors": "現在オンラインの訪問者",
+  "today_visitors": "今日の訪問者",
+  "max_online_today": "今日の最大同時接続数",
+  "panel_title": "ダッシュボード",
+  "updated_at": "更新日時："
+}

@@ -1,0 +1,21 @@
+{
+  "categories": "分类",
+  "pages": "页面",
+  "write": "撰写",
+  "manage": "管理",
+  "unread_comments": "未读评论",
+  "cache": "缓存",
+  "clear_api_cache": "清除 API 缓存",
+  "clear_data_cache": "清除数据缓存",
+  "clear_success": "清除成功",
+  "api_total_calls": "API 总调用次数",
+  "today_ip_visits": "今日 IP 访问次数",
+  "site_total_characters": "全站字符数",
+  "total_reads": "总阅读量",
+  "total_likes": "总点赞数",
+  "online_visitors": "当前在线访客",
+  "today_visitors": "今日访客",
+  "max_online_today": "今日最多同时在线人数",
+  "panel_title": "数据看板",
+  "updated_at": "数据更新于："
+}

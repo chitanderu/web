@@ -1,0 +1,11 @@
+{
+  "current_readers": "現在",
+  "reading_now": "人が読んでいます",
+  "realtime_tooltip": "リアルタイムの読者数。左側のタイムラインで他の人の読書進捗を確認できます（モバイルでは利用不可）",
+  "presence_you": "あなた",
+  "presence_me": "私",
+  "presence_reader": "読者",
+  "presence_list_sep": "、",
+  "presence_and_more": "他{count}人",
+  "presence_read_progress": "既読 {percent}%"
+}

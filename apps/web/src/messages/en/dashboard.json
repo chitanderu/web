@@ -1,0 +1,21 @@
+{
+  "categories": "Categories",
+  "pages": "Pages",
+  "write": "Write",
+  "manage": "Manage",
+  "unread_comments": "Unread comments",
+  "cache": "Cache",
+  "clear_api_cache": "Clear API cache",
+  "clear_data_cache": "Clear data cache",
+  "clear_success": "Cleared successfully",
+  "api_total_calls": "Total API calls",
+  "today_ip_visits": "Today's IP visits",
+  "site_total_characters": "Total site characters",
+  "total_reads": "Total reads",
+  "total_likes": "Total likes",
+  "online_visitors": "Current online visitors",
+  "today_visitors": "Today's visitors",
+  "max_online_today": "Today's peak concurrent visitors",
+  "panel_title": "Dashboard",
+  "updated_at": "Updated at:"
+}

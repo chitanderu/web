@@ -1,0 +1,79 @@
+html {
+  /* Accent color for form controls */
+  accent-color: var(--color-accent);
+
+  /* make app like native app in mobile */
+  -webkit-tap-highlight-color: transparent;
+
+  font-family: var(--font-sans);
+  background-color: var(--color-root-bg);
+}
+
+a,
+details summary {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+:root {
+  --bg-opacity: rgba(254, 253, 251, 0.72);
+  --color-root-bg: #fefefb;
+  --color-border: rgba(24, 24, 27, 0.1);
+}
+
+[data-theme='dark'] {
+  --color-accent: #f596aa;
+  --color-neutral-1: #141414;
+  --color-neutral-2: #242424;
+  --color-neutral-3: #404040;
+  --color-neutral-4: #5c5c5c;
+  --color-neutral-5: #787878;
+  --color-neutral-6: #a8a8a8;
+  --color-neutral-7: #d0d0d0;
+  --color-neutral-8: #e3e3e3;
+  --color-neutral-9: #f0f0f0;
+  --color-neutral-10: #f8f8f8;
+  --color-info: #0a84ff;
+  --color-success: #30d158;
+  --color-warning: #ff9f0a;
+  --color-error: #ff453a;
+  --bg-opacity: rgba(29, 29, 31, 0.72);
+  --color-root-bg: rgb(28, 28, 30);
+  --color-border: #3f3f46;
+}
+
+::selection {
+  background-color: color-mix(in oklab, var(--color-accent) 30%, transparent);
+  text-shadow: none;
+}
+
+::view-transition-new(root) {
+  animation: turnOff 800ms ease-in-out;
+}
+::view-transition-old(root) {
+  animation: none;
+}
+
+@keyframes turnOn {
+  0% {
+    clip-path: polygon(0% 0%, 100% 0, 100% 0, 0 0);
+  }
+  100% {
+    clip-path: polygon(0% 0%, 100% 0, 100% 100%, 0 100%);
+  }
+}
+
+[data-theme='dark']::view-transition-new(root) {
+  animation: turnOn 800ms ease-in-out;
+}
+::view-transition-old(root) {
+  animation: none;
+}
+
+@keyframes turnOff {
+  0% {
+    clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0% 100%);
+  }
+  100% {
+    clip-path: polygon(0 100%, 100% 100%, 100% 0, 0 0);
+  }
+}

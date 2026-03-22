@@ -1,0 +1,14 @@
+{
+  "404_description": "这颗星球还没有知识哦，去其他地方探索吧",
+  "404_backHome": "返回首页",
+  "500_title": "服务器出错了",
+  "render_error": "渲染页面时出现了错误",
+  "render_error_contact": "多次出现错误请联系开发者",
+  "render_error_thanks": "，谢谢！",
+  "page_deleted": "此页面已被删除",
+  "back_home": "返回首页",
+  "refresh": "刷新",
+  "biz_error_title": "数据接口请求出现错误",
+  "biz_error_http_status": "HTTP Status: {status}",
+  "biz_error_message": "错误信息：{message}"
+}

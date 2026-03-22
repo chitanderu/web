@@ -1,0 +1,309 @@
+import { useQuery } from '@tanstack/react-query'
+import clsx from 'clsx'
+import { useTranslations } from 'next-intl'
+import type { ReactNode } from 'react'
+import { useMemo } from 'react'
+import { useNavigate } from 'react-router-dom'
+
+import { StyledButton } from '~/components/ui/button'
+import { RelativeTime } from '~/components/ui/relative-time'
+import { apiClient } from '~/lib/request'
+import { toast } from '~/lib/toast'
+
+import {
+  CodeIcon,
+  FluentGuest28Filled,
+  IcBaselineFavoriteBorder,
+  IcSharpPeopleOutline,
+  MingcuteGame1Line,
+  NotebookMinimalistic,
+  PhAlignLeft,
+  RedisIcon,
+  SolarPieChartBroken,
+  TablerActivityHeartbeat,
+} from './icons'
+
+interface CardProps {
+  actions?: {
+    name: string
+    onClick: () => void
+    primary?: boolean
+    showBadage?: boolean
+  }[]
+  highlight?: boolean
+  icon: ReactNode
+  label: string
+
+  value: number | string
+}
+
+export const DataStat = () => {
+  const t = useTranslations('dashboard')
+  const tCommon = useTranslations('common')
+  const { data: stat, dataUpdatedAt } = useQuery({
+    queryKey: ['stat'],
+    queryFn: () => fetchStat(),
+
+    refetchInterval: 1000 * 15,
+  })
+
+  const { data: counts } = useQuery({
+    queryKey: ['readAndLikeCounts'],
+    queryFn: () => fetchReadAndLikeCounts(),
+    select(data) {
+      if (!data) return
+      return {
+        readAndLikeCounts: data,
+      }
+    },
+  })
+
+  const { data: siteWordCount } = useQuery({
+    queryKey: ['siteWordCount'],
+    queryFn: () => fetchSiteWordCount(),
+    select(data) {
+      if (!data) return
+      return data.count
+    },
+  })
+  const { readAndLikeCounts } = counts || {}
+  const navigate = useNavigate()
+
+  const dataStat = useMemo<CardProps[]>(() => {
+    if (!stat) return []
+    return [
+      {
+        label: tCommon('nav_posts'),
+        value: stat.posts,
+        icon: <CodeIcon />,
+        actions: [
+          {
+            name: t('write'),
+            primary: true,
+            onClick() {
+              navigate('/dashboard/posts/edit')
+            },
+          },
+          {
+            name: t('manage'),
+            onClick() {
+              navigate('/dashboard/posts/list')
+            },
+          },
+        ],
+      },
+
+      {
+        label: tCommon('nav_notes'),
+        value: stat.notes,
+        icon: <i className="i-mingcute-quill-pen-line" />,
+        actions: [
+          {
+            name: t('write'),
+            primary: true,
+            onClick() {
+              navigate('/dashboard/notes/edit')
+            },
+          },
+          {
+            name: t('manage'),
+            onClick() {
+              navigate('/dashboard/notes/list')
+            },
+          },
+        ],
+      },
+
+      {
+        label: t('pages'),
+        value: stat.pages,
+        icon: <i className="i-mingcute-file-line" />,
+        actions: [
+          {
+            primary: true,
+            name: t('manage'),
+            onClick() {
+              navigate('/dashboard/pages')
+            },
+          },
+        ],
+      },
+
+      {
+        label: t('categories'),
+        value: stat.categories,
+        icon: <i className="i-mingcute-pen-line" />,
+        actions: [
+          {
+            primary: true,
+            name: t('manage'),
+            onClick() {
+              navigate('/dashboard/posts/category')
+            },
+          },
+        ],
+      },
+
+      {
+        label: t('unread_comments'),
+        value: stat.unreadComments,
+        icon: <i className="i-mingcute-comment-line" />,
+        highlight: stat.unreadComments > 0,
+        actions: [
+          {
+            primary: true,
+            name: t('manage'),
+            onClick() {
+              navigate('/dashboard/comments')
+            },
+          },
+        ],
+      },
+
+      {
+        label: t('cache'),
+        value: 'Redis',
+        icon: <RedisIcon />,
+        actions: [
+          {
+            primary: false,
+            name: t('clear_api_cache'),
+            onClick() {
+              apiClient.proxy.clean_catch.get().then(() => {
+                toast.success(t('clear_success'))
+              })
+            },
+          },
+          {
+            primary: false,
+            name: t('clear_data_cache'),
+            onClick() {
+              apiClient.proxy.clean_redis.get().then(() => {
+                toast.success(t('clear_success'))
+              })
+            },
+          },
+        ],
+      },
+
+      {
+        label: t('api_total_calls'),
+        value: stat.callTime,
+        icon: <TablerActivityHeartbeat />,
+      },
+      {
+        label: t('today_ip_visits'),
+        value: stat.todayIpAccessCount,
+        icon: <SolarPieChartBroken />,
+      },
+      {
+        label: t('site_total_characters'),
+        value: siteWordCount,
+        icon: <PhAlignLeft />,
+      },
+
+      {
+        label: t('total_reads'),
+        value: readAndLikeCounts?.totalReads,
+        icon: <NotebookMinimalistic />,
+      },
+      {
+        label: t('total_likes'),
+        value: readAndLikeCounts?.totalLikes,
+        icon: <IcBaselineFavoriteBorder />,
+      },
+
+      {
+        label: t('online_visitors'),
+        value: stat.online,
+        icon: <IcSharpPeopleOutline />,
+      },
+      {
+        label: t('today_visitors'),
+        value: stat.todayOnlineTotal,
+        icon: <FluentGuest28Filled />,
+      },
+      {
+        value: stat.todayMaxOnline,
+        label: t('max_online_today'),
+        icon: <MingcuteGame1Line />,
+      },
+    ]
+  }, [
+    navigate,
+    readAndLikeCounts?.totalLikes,
+    readAndLikeCounts?.totalReads,
+    siteWordCount,
+    stat,
+    t,
+    tCommon,
+  ])
+
+  return (
+    <div className="relative @container">
+      <h3 className="mb-4 text-xl font-light text-current/80">
+        {t('panel_title')}：
+        <small className="text-sm">
+          {t('updated_at')} <RelativeTime date={new Date(dataUpdatedAt)} />
+        </small>
+      </h3>
+      <div className="grid grid-cols-1 gap-6 @[550px]:grid-cols-2 @[900px]:grid-cols-3 @[1124px]:grid-cols-4 @[1200px]:grid-cols-5">
+        {dataStat.map((stat) => (
+          <div
+            key={stat.label}
+            className={clsx(
+              'relative rounded-md border p-4',
+              stat.highlight && 'border-accent bg-accent/20',
+            )}
+          >
+            <div className="font-medium">{stat.label}</div>
+
+            <div className="my-2 text-2xl font-medium">
+              {formatNumber(stat.value)}
+            </div>
+
+            <div className="center absolute right-4 top-1/2 flex -translate-y-1/2 text-[30px]">
+              {stat.icon}
+            </div>
+
+            <div className="mt-4 flex flex-wrap gap-2">
+              {stat.actions?.map((action) => (
+                <StyledButton
+                  className="rounded-md shadow-none"
+                  key={action.name}
+                  variant={action.primary ? 'primary' : 'secondary'}
+                  onClick={action.onClick}
+                >
+                  {action.name}
+                </StyledButton>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
+const formatNumber = (num: string | number) => {
+  const isNumber = !Number.isNaN(+num)
+  if (!isNumber) return num
+  return Intl.NumberFormat().format(+num)
+}
+
+const fetchStat = async () => {
+  const counts = (await apiClient.aggregate.proxy.stat.get()) as any
+
+  return counts
+}
+
+const fetchReadAndLikeCounts = async () =>
+  await apiClient.aggregate.proxy.count_read_and_like.get<{
+    totalLikes: number
+    totalReads: number
+  }>()
+
+const fetchSiteWordCount = async () =>
+  await apiClient.aggregate.proxy.count_site_words.get<{
+    count: number
+  }>()

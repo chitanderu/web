@@ -1,0 +1,90 @@
+html.noise {
+  --paper-texture-enabled: 0;
+  --paper-grain-image: none;
+  --paper-ambient-highlight: rgb(255 255 255 / 0.06);
+  --paper-bend-strong: rgb(0 0 0 / 0.014);
+  --paper-bend-soft: rgb(0 0 0 / 0.009);
+}
+
+html[data-theme='dark'].noise {
+  --paper-ambient-highlight: rgb(255 255 255 / 0.024);
+  --paper-bend-strong: rgb(255 255 255 / 0.012);
+  --paper-bend-soft: rgb(255 255 255 / 0.008);
+}
+
+html.noise body::before {
+  position: fixed;
+  inset: 0;
+  content: '';
+  pointer-events: none;
+  opacity: var(--paper-texture-enabled);
+  background-image:
+    radial-gradient(
+      circle 900px at 50% -8%,
+      var(--paper-ambient-highlight) 0%,
+      transparent 60%
+    ),
+    linear-gradient(
+      110deg,
+      transparent 20%,
+      var(--paper-bend-strong) 55%,
+      transparent 80%
+    ),
+    linear-gradient(25deg, transparent 30%, var(--paper-bend-soft) 70%),
+    var(--paper-grain-image);
+  background-size:
+    100% 100%,
+    100% 100%,
+    100% 100%,
+    192px 192px;
+  background-repeat: no-repeat, no-repeat, no-repeat, repeat;
+  background-position:
+    center,
+    center,
+    center,
+    0 0;
+}
+
+@media print {
+  html.noise body::before {
+    display: none;
+  }
+}
+
+.code-wrap {
+  white-space: break-spaces !important;
+  overflow: auto !important;
+  word-break: break-word !important;
+
+  pre[class*='language-'],
+  code[class*='language-'] {
+    white-space: break-spaces !important;
+    overflow: auto !important;
+    word-break: break-word !important;
+  }
+}
+
+.excalidraw .Modal__content {
+  pointer-events: auto;
+}
+
+html[data-theme='dark'] .shiki,
+html[data-theme='dark'] .shiki span {
+  color: var(--shiki-dark) !important;
+  font-style: var(--shiki-dark-font-style) !important;
+  font-weight: var(--shiki-dark-font-weight) !important;
+  text-decoration: var(--shiki-dark-text-decoration) !important;
+}
+/* https://stackoverflow.com/questions/10826784/make-html5-video-poster-be-same-size-as-video-itself */
+video.fit {
+  --video-width: 426;
+  --video-height: 240;
+  aspect-ratio: var(--video-width) / var(--video-height);
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+@view-transition {
+  navigation: auto;
+}

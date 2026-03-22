@@ -1,0 +1,14 @@
+{
+  "404_description": "This planet has no knowledge yet. Go explore somewhere else!",
+  "404_backHome": "Back to Home",
+  "500_title": "Server Error",
+  "render_error": "An error occurred while rendering the page",
+  "render_error_contact": "If this error persists, please contact the developer",
+  "render_error_thanks": ", thank you!",
+  "page_deleted": "This page has been deleted",
+  "back_home": "Back to Home",
+  "refresh": "Refresh",
+  "biz_error_title": "API request error",
+  "biz_error_http_status": "HTTP Status: {status}",
+  "biz_error_message": "Error: {message}"
+}

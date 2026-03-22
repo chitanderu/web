@@ -1,0 +1,446 @@
+@layer components {
+  .cover-mask-b {
+    mask-image: linear-gradient(180deg, #fff -17.19%, #00000000 92.43%);
+  }
+}
+
+@layer components {
+  .border-border {
+    @apply border-neutral-9/10;
+  }
+}
+
+@layer utilities {
+  .scrollbar-none::-webkit-scrollbar {
+    width: 0 !important;
+    height: 0 !important;
+  }
+  .rich-link {
+    @apply no-underline!;
+  }
+  .shiro-link--underline,
+  .rich-link {
+    color: currentColor;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+
+    @apply decoration-neutral-4/20 hover:no-underline!;
+
+    background-image: linear-gradient(var(--color-accent), var(--color-accent));
+    background-size: 0% 1.5px;
+    background-repeat: no-repeat;
+    /* NOTE: this won't work with background images   */
+
+    transition: all 500ms ease !important;
+
+    @apply border-0;
+
+    background-position: left 1.2em;
+
+    &:hover {
+      background-size: 100% 1.5px;
+      text-shadow:
+        0.05em 0 var(--color-neutral-1),
+        -0.05em 0 var(--color-neutral-1);
+
+      transition: all 250ms ease;
+    }
+
+    &::selection {
+      text-shadow: none;
+    }
+
+    &.no-shadow {
+      text-shadow: none;
+    }
+  }
+
+  .shiro-timeline {
+    position: relative;
+    list-style: none;
+
+    @apply min-w-0 flex-1;
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: -2px;
+      width: 2px;
+      top: var(--indicator-top, 0);
+      height: var(--indicator-height, 0);
+      opacity: var(--indicator-opacity, 0);
+      background-color: var(--color-accent);
+      transition:
+        top 0.2s ease,
+        height 0.2s ease,
+        opacity 0.15s ease;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    & > li {
+      position: relative;
+      padding: 12px 0 12px 24px;
+      transition: background 0.2s;
+      animation: timeline-fade-up 0.4s ease-out both;
+      animation-delay: calc(var(--li-index, 0) * 50ms);
+    }
+
+    & > li:hover {
+      background: linear-gradient(
+        90deg,
+        color-mix(in oklch, var(--color-accent) 4%, transparent),
+        transparent 70%
+      );
+    }
+
+    & > li:hover .timeline-date {
+      color: var(--color-accent);
+    }
+
+    & > li:hover .timeline-title {
+      color: var(--color-neutral-10);
+    }
+
+    & a {
+      line-height: 1.6;
+    }
+  }
+
+  @keyframes timeline-fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .shiro-timeline-spine {
+    border-left: 2px solid var(--color-border);
+    margin-left: 4px;
+  }
+}
+
+@layer components {
+  .mask-cover {
+    mask-image: linear-gradient(to right, transparent, rgb(0 0 0 / 100%) 90%);
+    opacity: 0.3;
+    transition: opacity 0.3s ease-in-out;
+  }
+
+  .group:hover .mask-cover {
+    opacity: 0.5;
+  }
+
+  .animation-blink {
+    animation: blink 1.2s linear infinite;
+  }
+
+  .mask-top {
+    mask-image: linear-gradient(to top, transparent, rgb(0 0 0 / 100%) 90%);
+    opacity: 0.3;
+    transition: opacity 0.3s ease-in-out;
+  }
+
+  @keyframes blink {
+    0% {
+      opacity: 0;
+    }
+    40% {
+      opacity: 0;
+    }
+    40.1% {
+      opacity: 1;
+    }
+    99.9% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+
+  /* 404 */
+  .hit-the-floor {
+    font-size: 12em;
+    font-weight: bold;
+    font-family: Helvetica;
+    text-shadow:
+      0 1px 0 #ccc,
+      0 2px 0 #c9c9c9,
+      0 3px 0 #bbb,
+      0 4px 0 #b9b9b9,
+      0 5px 0 #aaa,
+      0 6px 1px rgba(0, 0, 0, 0.1),
+      0 0 5px rgba(0, 0, 0, 0.1),
+      0 1px 3px rgba(0, 0, 0, 0.3),
+      0 3px 5px rgba(0, 0, 0, 0.2),
+      0 5px 10px rgba(0, 0, 0, 0.25),
+      0 10px 10px rgba(0, 0, 0, 0.2),
+      0 20px 20px rgba(0, 0, 0, 0.15);
+  }
+}
+
+@layer components {
+  .page-glow-container {
+    @apply pointer-events-none absolute inset-x-0 top-0 h-[720px] w-full;
+
+    overflow: hidden;
+    animation: fade-in 0.8s ease 0.2s both;
+    -webkit-mask-image: linear-gradient(
+      180deg,
+      rgb(0 0 0 / 100%) 0%,
+      rgb(0 0 0 / 100%) 48%,
+      rgb(0 0 0 / 72%) 64%,
+      rgb(0 0 0 / 24%) 82%,
+      transparent 100%
+    );
+    mask-image: linear-gradient(
+      180deg,
+      rgb(0 0 0 / 100%) 0%,
+      rgb(0 0 0 / 100%) 48%,
+      rgb(0 0 0 / 72%) 64%,
+      rgb(0 0 0 / 24%) 82%,
+      transparent 100%
+    );
+  }
+
+  @keyframes glow-enter {
+    0% {
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(0.6);
+    }
+    100% {
+      opacity: var(--glow-opacity, 0.4);
+      transform: translate(-50%, -50%) scale(1);
+    }
+  }
+
+  .signature-animated path {
+    stroke-dasharray: 2400;
+    stroke-dashoffset: 2400;
+    fill: transparent;
+    animation: drawSignature 8s linear infinite both;
+    stroke-width: 2px;
+    stroke: var(--color-neutral-9);
+  }
+
+  @keyframes drawSignature {
+    0% {
+      stroke-dashoffset: 2400;
+    }
+
+    15% {
+      fill: transparent;
+    }
+
+    35%,
+    75% {
+      stroke-dashoffset: 0;
+      fill: var(--color-neutral-9);
+    }
+
+    90%,
+    100% {
+      stroke-dashoffset: 2400;
+      fill: transparent;
+    }
+  }
+
+  .animation-wave {
+    animation: wave 2s infinite;
+  }
+
+  .hover-shake:hover {
+    animation: shake 0.4s ease-in-out;
+  }
+
+  @keyframes shake {
+    0%,
+    100% {
+      transform: rotate(0deg);
+    }
+    25% {
+      transform: rotate(-5deg);
+    }
+    75% {
+      transform: rotate(5deg);
+    }
+  }
+
+  @keyframes wave {
+    0%,
+    100% {
+      transform: rotate(0deg);
+    }
+    50% {
+      transform: rotate(20deg);
+    }
+  }
+}
+
+@layer components {
+  .content-auto {
+    content-visibility: auto;
+  }
+
+  .shadow-out-sm {
+    box-shadow:
+      0 0 10px rgba(120, 120, 120, 0.1),
+      0 5px 20px rgba(120, 120, 120, 0.2);
+  }
+
+  .backface-hidden {
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    -webkit-transform: translate3d(0, 0, 0);
+    -moz-transform: translate3d(0, 0, 0);
+  }
+
+  .center {
+    align-items: center;
+    justify-content: center;
+  }
+
+  .fill-content {
+    min-height: calc(100vh - 17.5rem);
+  }
+
+  .card-shadow {
+    box-shadow:
+      0 0 0 1px rgba(0, 0, 0, 0.08),
+      0 4px 6px rgba(0, 0, 0, 0.04);
+  }
+
+  .card-shadow:hover {
+    box-shadow:
+      0 0 0 1px rgba(0, 0, 0, 0.08),
+      0 6px 14px rgba(0, 0, 0, 0.08);
+  }
+}
+
+@layer components {
+  .shadow-perfect {
+    /* https://codepen.io/jh3y/pen/yLWgjpd */
+    --tint: 214;
+    --alpha: 3;
+    --base: hsl(var(--tint, 214) 80% 27% / calc(var(--alpha, 4) * 1%));
+    /**
+      * Use relative syntax to get to: hsl(221 25% 22% / 40%)
+    */
+    --shade: hsl(from var(--base) calc(h + 8) 25 calc(l - 5));
+    --perfect-shadow:
+      0 0 0 1px var(--base), 0 1px 1px -0.5px var(--shade),
+      0 3px 3px -1.5px var(--shade), 0 6px 6px -3px var(--shade),
+      0 12px 12px -6px var(--base), 0 24px 24px -12px var(--base);
+    box-shadow: var(--perfect-shadow);
+  }
+
+  .perfect-sm {
+    --alpha: 1;
+  }
+
+  .perfect-md {
+    --alpha: 2;
+  }
+
+  [theme='dark'] .shadow-perfect {
+    --tint: 221;
+  }
+}
+
+@property --mask-top {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 0px;
+}
+
+@property --mask-bottom {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 30px;
+}
+
+@layer components {
+  .mask-scroller {
+    --mask-top: 0px;
+    --mask-bottom: 30px;
+    mask: linear-gradient(
+      to bottom,
+      transparent calc(var(--mask-top) - 30px),
+      black var(--mask-top),
+      black calc(100% - var(--mask-bottom)),
+      transparent calc(100% - var(--mask-bottom) + 30px)
+    );
+  }
+
+  @supports (animation-timeline: scroll(self block)) {
+    .mask-scroller {
+      animation-name: mask-up, mask-down;
+      animation-duration: 1s, 1s;
+      animation-timing-function: linear, linear;
+      animation-fill-mode: both, both;
+      animation-timeline: scroll(self block), scroll(self block);
+      animation-range:
+        0 50px,
+        calc(100% - 50px) 100%;
+    }
+  }
+  @supports (animation-timeline: scroll()) and
+    (not (animation-timeline: scroll(self block))) {
+    .mask-scroller {
+      animation-name: mask-up, mask-down;
+      animation-duration: 1s, 1s;
+      animation-timing-function: linear, linear;
+      animation-fill-mode: both, both;
+      animation-timeline: scroll(), scroll();
+      animation-range:
+        0 50px,
+        calc(100% - 50px) 100%;
+    }
+  }
+  @keyframes mask-up {
+    to {
+      --mask-top: 30px;
+    }
+  }
+  @keyframes mask-down {
+    to {
+      --mask-bottom: 0px;
+    }
+  }
+}
+
+@layer components {
+  .shadow-context-menu {
+    box-shadow:
+      rgba(0, 0, 0, 0.067) 0px 3px 8px,
+      rgba(0, 0, 0, 0.067) 0px 2px 5px,
+      rgba(0, 0, 0, 0.067) 0px 1px 1px;
+  }
+}
+
+/* Tailwind 4 Extensions */
+@layer components {
+  .field-sizing-content {
+    field-sizing: content;
+  }
+
+  .comment-block-active {
+    background: color-mix(
+      in srgb,
+      var(--color-accent, #33a6b8) 5%,
+      transparent
+    );
+    border-radius: 4px;
+    transition: background 0.15s ease;
+  }
+}
+
+/* Safari 不显示 PageColorGradient，规避 blur+mask 性能与撕裂问题（由 JS 注入 is-safari class） */
+.is-safari .page-glow-container {
+  display: none !important;
+}

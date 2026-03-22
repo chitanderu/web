@@ -1,0 +1,259 @@
+@layer components {
+  .animate-scale-in {
+    animation: scale-in 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  @keyframes scale-in {
+    0% {
+      transform: scale(0.9);
+      opacity: 0;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+
+  .timeline-hidden {
+    mask: linear-gradient(90deg, #000 25%, #000000e6 50%, #00000000) 150% 0 /
+      400% no-repeat;
+  }
+
+  .timeline-reveal {
+    animation: timeline-reveal 3s ease-in-out forwards;
+  }
+
+  @keyframes timeline-reveal {
+    0% {
+      mask: linear-gradient(90deg, #000 25%, #000000e6 50%, #00000000) 150% 0 /
+        400% no-repeat;
+    }
+    100% {
+      mask: linear-gradient(90deg, #000 25%, #000000e6 50%, #00000000) 0 / 400%
+        no-repeat;
+    }
+  }
+
+  /* Hero: light drift */
+  @keyframes hero-light-drift {
+    from { transform: translate(0, 0) scale(1); }
+    to   { transform: translate(15px, 8px) scale(1.05); }
+  }
+
+  /* Hero: entry center-spread animation */
+  @keyframes hero-enter-scale {
+    from { opacity: 0; transform: scale(0.96); }
+    to   { opacity: 1; transform: scale(1); }
+  }
+  @keyframes hero-enter-spread-down {
+    from { opacity: 0; transform: translateY(-8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes hero-enter-spread-up {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes hero-enter-fade {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .hero-enter-bg-1 { animation: hero-enter-fade 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0s both; }
+    .hero-enter-bg-2 { animation: hero-enter-fade 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.05s both; }
+    .hero-enter-title { animation: hero-enter-scale 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.15s both; }
+    .hero-enter-desc { animation: hero-enter-spread-down 0.45s cubic-bezier(0.22, 1, 0.36, 1) 0.4s both; }
+    .hero-enter-avatar { animation: hero-enter-scale 0.45s cubic-bezier(0.22, 1, 0.36, 1) 0.45s both; }
+    .hero-enter-stats { animation: hero-enter-spread-down 0.45s cubic-bezier(0.22, 1, 0.36, 1) 0.5s both; }
+    .hero-enter-social { animation: hero-enter-spread-down 0.4s cubic-bezier(0.22, 1, 0.36, 1) 0.55s both; }
+    .hero-enter-writing { animation: hero-enter-spread-up 0.45s cubic-bezier(0.22, 1, 0.36, 1) 0.65s both; }
+    .hero-enter-hitokoto { animation: hero-enter-spread-up 0.45s cubic-bezier(0.22, 1, 0.36, 1) 0.8s both; }
+  }
+
+  /* Hero: light drift + breathing floats (respects reduced motion) */
+  @media (prefers-reduced-motion: no-preference) {
+    .hero-light-drift-slow { animation: hero-light-drift 8s ease-in-out infinite alternate; }
+    .hero-light-drift-fast { animation: hero-light-drift 12s ease-in-out infinite alternate-reverse; }
+
+    @media (min-width: 1024px) {
+      .hero-breathe-1 { animation: hero-breathe-a 14s ease-in-out infinite alternate; }
+      .hero-breathe-2 { animation: hero-breathe-b 16s ease-in-out infinite alternate; }
+      .hero-breathe-3 { animation: hero-breathe-a 18s ease-in-out infinite alternate-reverse; }
+      .hero-breathe-4 { animation: hero-breathe-b 15s ease-in-out infinite alternate; }
+      .hero-breathe-5 { animation: hero-breathe-a 13s ease-in-out infinite alternate-reverse; }
+      .hero-breathe-6 { animation: hero-breathe-b 17s ease-in-out infinite alternate; }
+    }
+  }
+
+  @keyframes hero-breathe-a {
+    from { transform: translate(0, 0); }
+    to   { transform: translate(2px, -3px); }
+  }
+
+  @keyframes hero-breathe-b {
+    from { transform: translate(0, 0); }
+    to   { transform: translate(-2px, 2px); }
+  }
+
+  /* SecondScreen: entry stagger (continues Hero sequence) */
+  @keyframes ss-upper-enter {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes ss-lower-unfold {
+    from { opacity: 0; transform: rotateX(-90deg); }
+    to   { opacity: 1; transform: rotateX(0deg); }
+  }
+  @keyframes ss-crease-fade {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .ss-enter-upper { animation: ss-upper-enter 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.95s both; }
+    .ss-enter-crease { animation: ss-crease-fade 0.3s cubic-bezier(0.22, 1, 0.36, 1) 1.15s both; }
+    .ss-enter-lower {
+      transform-origin: top center;
+      animation: ss-lower-unfold 0.7s cubic-bezier(0.22, 1, 0.36, 1) 1.2s both;
+    }
+
+    @media (max-width: 1023px) {
+      .ss-enter-lower {
+        animation-name: ss-upper-enter;
+        animation-duration: 0.5s;
+      }
+    }
+  }
+
+  @supports (animation-timeline: view()) {
+    /* Hero parallax exit */
+    @keyframes hero-exit-bg {
+      from { opacity: 1; transform: translateY(0); }
+      to   { opacity: 0; transform: translateY(-10%); }
+    }
+    @keyframes hero-exit-text {
+      from { opacity: 1; transform: translateY(0); }
+      to   { opacity: 0; transform: translateY(-30%); }
+    }
+    @keyframes hero-exit-meta {
+      from { opacity: 1; transform: translateY(0); }
+      to   { opacity: 0; transform: translateY(-40%); }
+    }
+    @keyframes hero-exit-avatar {
+      from { opacity: 1; transform: translateY(0); }
+      to   { opacity: 0; transform: translateY(-50%); }
+    }
+
+    .hero-scroll-container {
+      view-timeline-name: --hero-tl;
+      view-timeline-axis: block;
+    }
+    .hero-exit-bg {
+      animation: hero-exit-bg 1s linear both;
+      animation-timeline: --hero-tl;
+      animation-range: exit 0% exit 100%;
+    }
+    .hero-exit-text {
+      animation: hero-exit-text 1s linear both;
+      animation-timeline: --hero-tl;
+      animation-range: exit 0% exit 80%;
+    }
+    .hero-exit-meta {
+      animation: hero-exit-meta 1s linear both;
+      animation-timeline: --hero-tl;
+      animation-range: exit 0% exit 70%;
+    }
+    .hero-exit-avatar {
+      animation: hero-exit-avatar 1s linear both;
+      animation-timeline: --hero-tl;
+      animation-range: exit 0% exit 60%;
+    }
+
+    /* Timeline right-to-left stagger */
+    @keyframes tl-title-fade {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+    @keyframes tl-col-slide {
+      from { opacity: 0; transform: translateX(40px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes tl-divider-fade {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+    @keyframes tl-footer-fade {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+    @keyframes tl-col-fade-up {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .tl-scroll-container {
+      view-timeline-name: --tl-tl;
+      view-timeline-axis: block;
+    }
+    .tl-scroll-title {
+      animation: tl-title-fade 1s linear both;
+      animation-timeline: --tl-tl;
+      animation-range: entry-crossing 0% entry-crossing 15%;
+    }
+    .tl-scroll-col {
+      animation: tl-col-slide 1s linear both;
+      animation-timeline: --tl-tl;
+      animation-range:
+        entry-crossing calc(5% + var(--col-i, 0) * 10%)
+        entry-crossing calc(30% + var(--col-i, 0) * 10%);
+    }
+    .tl-scroll-divider {
+      animation: tl-divider-fade 1s linear both;
+      animation-timeline: --tl-tl;
+      animation-range:
+        entry-crossing calc(8% + var(--col-i, 0) * 10%)
+        entry-crossing calc(25% + var(--col-i, 0) * 10%);
+    }
+    .tl-scroll-footer {
+      animation: tl-footer-fade 1s linear both;
+      animation-timeline: --tl-tl;
+      animation-range: entry-crossing 55% entry-crossing 70%;
+    }
+
+    @media (max-width: 1023px) {
+      .tl-scroll-col {
+        animation-name: tl-col-fade-up;
+        animation-range:
+          entry-crossing calc(5% + var(--col-i, 0) * 8%)
+          entry-crossing calc(30% + var(--col-i, 0) * 8%);
+      }
+    }
+
+    /* Windsock quick entry */
+    @keyframes ws-fade-up {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .ws-scroll-container {
+      view-timeline-name: --ws-tl;
+      view-timeline-axis: block;
+    }
+    .ws-scroll-enter {
+      animation: ws-fade-up 1s linear both;
+      animation-timeline: --ws-tl;
+      animation-range:
+        entry-crossing calc(var(--ws-i, 0) * 15%)
+        entry-crossing calc(40% + var(--ws-i, 0) * 15%);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-exit-bg, .hero-exit-text, .hero-exit-meta, .hero-exit-avatar,
+    .ss-enter-upper, .ss-enter-lower, .ss-enter-crease,
+    .tl-scroll-title, .tl-scroll-col, .tl-scroll-divider, .tl-scroll-footer,
+    .ws-scroll-enter {
+      animation: none !important;
+    }
+  }
+}

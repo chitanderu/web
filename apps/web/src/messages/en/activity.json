@@ -1,0 +1,11 @@
+{
+  "current_readers": "Currently ",
+  "reading_now": " people are reading",
+  "realtime_tooltip": "Real-time reader count. View others' reading progress on the left timeline (not available on mobile)",
+  "presence_you": "You",
+  "presence_me": "Me",
+  "presence_reader": "Reader",
+  "presence_list_sep": ", ",
+  "presence_and_more": "and {count} more",
+  "presence_read_progress": "Read {percent}%"
+}

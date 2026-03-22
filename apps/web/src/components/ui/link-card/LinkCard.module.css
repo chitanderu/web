@@ -1,0 +1,147 @@
+@reference "../../../styles/tailwindcss.css";
+
+.card {
+  position: relative;
+  display: flex;
+  box-sizing: border-box;
+  flex-direction: row;
+  align-items: center;
+  width: 32rem;
+  min-height: 6.5rem;
+  border-radius: 0.75rem;
+  max-width: 100%;
+  overflow: hidden;
+  margin: 1.25rem auto;
+  padding: 1rem 1.5rem;
+  backdrop-filter: blur(20px) saturate(180%);
+  transition: background-color 0.2s ease-in-out;
+  text-indent: 0;
+  gap: 1.25rem;
+  min-width: 0;
+
+  @apply cursor-pointer border font-sans no-underline;
+  @apply [&_*]:!not-italic;
+  @apply border border-neutral-3/80 bg-neutral-1/80;
+  @apply transition-colors duration-200;
+
+  & span {
+    border-bottom: 0 !important;
+  }
+}
+
+.content {
+  flex: 1 1 auto;
+  position: relative;
+  display: block;
+  min-width: 0;
+  z-index: 1;
+}
+
+.title {
+  line-height: 1.5rem;
+  display: -webkit-box;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  font-size: 1.125rem;
+  font-weight: 500;
+  margin-bottom: 0.25rem;
+}
+
+.desc {
+  @apply text-neutral-7;
+
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 0.5rem;
+  min-width: 0;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+}
+
+.image {
+  @apply aspect-square shrink-0 bg-cover bg-center bg-no-repeat;
+  @apply z-[1] bg-neutral-1;
+
+  height: 3.5rem;
+  width: 3.5rem;
+  margin-left: 0.125rem;
+  border-radius: 0.5rem;
+}
+
+.skeleton {
+  & .title,
+  & .desc {
+    border-radius: 0.5rem;
+  }
+
+  & .title {
+    width: 8rem;
+    height: 1.5rem;
+
+    @apply bg-neutral-3;
+  }
+
+  & .desc {
+    width: 100%;
+    margin-top: 0.75rem;
+    height: 1rem;
+
+    @apply bg-neutral-3;
+  }
+
+  & .image {
+    height: 3.5rem;
+    width: 3.5rem;
+
+    @apply bg-neutral-3;
+  }
+}
+
+.error {
+  background-color: #e1534a20 !important;
+
+  & .title,
+  & .desc,
+  & .image {
+    background-color: #e1534a79;
+    color: transparent;
+  }
+
+  & .image {
+    background-image: none !important;
+  }
+}
+
+.wide {
+  width: 100%;
+  max-width: 40rem;
+}
+
+.media {
+  width: 100%;
+
+  & .desc {
+    -webkit-line-clamp: 4;
+  }
+}
+
+.github {
+  width: 36rem;
+
+  @media (max-width: 640px) {
+    width: 100%;
+  }
+}
+
+.academic {
+  width: 38rem;
+
+  & .desc {
+    -webkit-line-clamp: 3;
+  }
+}

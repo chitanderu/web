@@ -1,0 +1,29 @@
+import type {
+  CommentModel,
+  CommentState,
+  NoteModel,
+  PaginateResult,
+  PostModel,
+} from '@mx-space/api-client'
+import type { InfiniteData } from '@tanstack/react-query'
+import { createContextState } from 'foxact/create-context-state'
+import { createContext, use } from 'react'
+
+export const CommentStateContext = createContext<CommentState>(null!)
+interface CommentDataSourceContextType {
+  data?: InfiniteData<PaginateResult<CommentModel>>
+  isLoading: boolean
+}
+
+export const CommentDataSourceContext =
+  createContext<CommentDataSourceContextType>(null!)
+export const CommentDataContext = createContext<{
+  refModelMap: Map<string, PostModel | NoteModel>
+}>(null!)
+export const useCommentDataSource = () => use(CommentDataSourceContext)
+
+export const [
+  CommentSelectionKeysProvider,
+  useCommentSelectionKeys,
+  useSetCommentSelectionKeys,
+] = createContextState(new Set<string>())
