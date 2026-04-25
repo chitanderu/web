@@ -1,0 +1,30 @@
+node_modules
+
+# macOS
+.DS_Store
+
+# Build output
+.next/
+.turbo/
+dist/
+out/
+
+# TypeScript incremental cache
+*.tsbuildinfo
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Env
+.env
+.env.local
+.env.*.local
+
+# Editor
+.vscode/*
+!.vscode/extensions.json
+.idea/

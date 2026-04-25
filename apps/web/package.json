@@ -49,6 +49,7 @@
     "@tanstack/react-query-devtools": "5.91.3",
     "@tanstack/react-query-persist-client": "5.90.24",
     "@vercel/functions": "3.4.3",
+    "aplayer": "^1.10.1",
     "better-auth": "1.5.4",
     "blurhash": "2.0.5",
     "chroma-js": "3.2.0",

@@ -21,6 +21,7 @@ import { SafariDetector } from '~/components/common/SafariDetector'
 import { SyncServerTime } from '~/components/common/SyncServerTime'
 import { Root } from '~/components/layout/root/Root'
 import { AccentColorStyleInjector } from '~/components/modules/shared/AccentColorStyleInjector'
+import { APlayerWidget } from '~/components/modules/shared/APlayerWidget'
 import { SearchPanelWithHotKey } from '~/components/modules/shared/SearchFAB'
 import { BackgroundTexture } from '~/components/ui/background/BackgroundTexture'
 import { RootPortal } from '~/components/ui/portal'
@@ -159,6 +160,7 @@ export default async function LocaleLayout({ children, params }: Props) {
                     <Root>{children}</Root>
                   </div>
                   <SearchPanelWithHotKey />
+                  <APlayerWidget />
                   <Analyze />
                   <SyncServerTime />
                   <div className="fixed inset-y-0 right-0 w-[var(--removed-body-scroll-bar-size)]" />
